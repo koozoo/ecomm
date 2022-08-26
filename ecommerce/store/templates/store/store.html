@@ -14,7 +14,7 @@
             <h6><strong>{{ product.name }}</strong></h6>
             <hr>
 
-            <button class="btn btn-outline-secondary add-btn">Добавить</button>
+            <button data-product="{{ product.pk }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Добавить</button>
             <a href="#" class="btn btn-outline-success">View</a>
             <h4 style="display: inline-block; float: right; font-size: 17px;"><strong>{{ product.price|floatformat:2 }} руб.</strong></h4>
         </div>

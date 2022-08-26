@@ -1,6 +1,7 @@
 from distutils.command.upload import upload
 from email.policy import default
 from re import T
+import re
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -46,6 +47,15 @@ class Order(models.Model):
         return str(self.id)
 
     @property
+    def shipping(self):
+        shipping = False
+        orderitems = self.orderitem_set.all()
+        for i in orderitems:
+            if i.product.digital == False:
+                shipping = True
+        return shipping
+
+    @property
     def get_cart_total(self):
         orderitems = self.orderitem_set.all()
         total = sum([item.get_total_sum_item for item in orderitems])
@@ -56,6 +66,7 @@ class Order(models.Model):
         orderitems = self.orderitem_set.all()
         item = sum([item.quantity for item in orderitems])
         return item
+
 
 
 class OrderItem(models.Model):
