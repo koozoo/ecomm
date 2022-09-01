@@ -42,7 +42,7 @@
                         <img data-product="{{ item.product.pk }}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
                     </div>
                 </div>
-                <div style="flex:1"><p>{{ item.get_total_sum_item|floatformat:2 }} руб.</p></div>
+                <div style="flex:1"><p>{{ item.get_total_sum_item }} руб.</p></div>
             </div>
             {% endfor %}
     </div>

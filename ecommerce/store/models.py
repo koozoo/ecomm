@@ -20,7 +20,7 @@ class Customer(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=7, decimal_places=2)
     digital = models.BooleanField(default=False, null=True, blank=True)
     image = models.ImageField(upload_to='static/media/%Y/%m/%d', blank=True, null=True)
 
@@ -74,13 +74,16 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
 
+    def __str__(self):
+        return str(self.product.name)
+
     @property
     def get_total_sum_item(self):
         summ = self.product.price * self.quantity
         return summ
 
 
-class ShipoingAssress(models.Model):
+class ShippingAddress(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     address = models.CharField(max_length=200, null=True)
