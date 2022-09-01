@@ -94,7 +94,11 @@ def processOrder(request):
 
     if total == float(order.get_cart_total):
         order.complite = True
-    print('before seve', order.customer, order.transaction_id, order.date_ordered, order.complite)
+
+    print('before seve')
+    print( order.customer)
+    print(order.transaction_id)
+    print(order.date_ordered, order.complite)    
     order.save()
 
     if order.shipping == True:
